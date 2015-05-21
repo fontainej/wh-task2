@@ -14,8 +14,5 @@
 
 # Running the app
 
-- For debug mode
-	gulp
-
-- For release mode
-	gulp release
+- For debug mode run: gulp
+- For release mode run: gulp release
