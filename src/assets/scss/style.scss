@@ -1,54 +1,106 @@
-@import "susy";
-
-/* Changing Susy default global settings */
-$susy: (
-    columns: 12,
-    container: 1120px,
-    global-box-sizing: border-box 
-);
-
-@include border-box-sizing;
-
-$primaryColor: red;
-$secondaryColor: #eee;
-$menuPadding: 5px 10px;
-
 body {
-    margin: 0 auto;
-    padding: 0;
+    margin: 0;
+    min-width: $min-page-width;
+    position: relative;
 }
 
-.menubar {
-    background: $secondaryColor;
-}
+header {
+    @include transition(all, 0.4s, ease);
+    padding: 60px 0;
+    text-align: center;
+    width: 100%;
+    background-color: $primary-color;
+    margin-bottom: gutter();
 
-.menu {
-    list-style: none;
-    margin: 10px 0;
-    padding: 0;
+    #menu-icon {
+        display: none;
+    }
 
-    > li {
-        display: inline;
-        border-right: 1px solid #444;
+    nav ul {
+        list-style: none;
+        margin: 10px;
+        padding: 0;
+        
+        li {
+            border-right: 1px solid $secondary-color;
+            display: inline;
 
-        > a {
-            padding: $menuPadding;
+            a {
+                padding: 10px;
+            }
+        }
+
+        li:last-child {
+            border-right: 0;
         }
     }
 
-    > li:last-child {
-        border-right: 0;
+    @media screen and (max-width: $mobile-device) {
+        #sidebar {
+            @include transition(all, 0.5s, ease-out);
+            background: $secondary-color;
+            height: 100%;
+            left: -$min-page-width;
+            margin: 0;
+            padding: 50px 0 0 0;
+            position: fixed;
+            text-align: center;
+            top: 0;
+            width: $min-page-width;
+
+            li {
+                border-bottom: 1px solid $primary-color;
+                border-right: 0;
+                display: list-item;
+                padding: 15px;
+            }
+
+            li:last-child {
+                border-bottom: 0;
+            }
+
+            &.open {
+                @include transition(all, 0.5s, ease-in);
+                left: 0;
+            }
+        }
+
+        #menu-icon {
+            cursor: pointer;
+            display: block;
+            left: 0;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+        }
     }
 }
 
-.container {
-    @include container;
+header.sticky {
+    opacity: 0.98;
+    padding: 50px 0 10px 0;
+    position: fixed;
 }
 
-.col-6 {
-    @include span(6);
+main {
+    img {
+        @include span(3);
+        margin-bottom: gutter();
+
+        &:nth-child(5n+1) {
+            @include gallery(12);
+            margin-right: 0 !important;
+        }
+    }
 }
 
-.col-8 {
-    @include span(8);
+footer {
+    article {
+        background: $tertiary-color;
+
+        p {
+            padding: 0 10px;
+        }
+    }
 }

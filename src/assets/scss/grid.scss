@@ -1,0 +1,21 @@
+.container {
+    @include container;
+}
+
+.col-4 {
+    @include span(4 of 12);
+    margin-bottom: gutter();
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    @media screen and (max-width: $mobile-device) {
+        @include span(12);
+    }
+}
+
+.col-12 {
+    @include span(12);
+    margin-bottom: gutter();
+}

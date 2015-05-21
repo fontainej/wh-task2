@@ -1,0 +1,16 @@
+@import "susy";
+
+$susy: (
+    columns: 12,
+    container: 1120px,
+    global-box-sizing: border-box,
+    gutters: .20,
+    gutter-position: split,
+    ouput: isolate
+);
+
+
+@import 'variables';
+@import 'mixins';
+@import 'grid';
+@import 'style';

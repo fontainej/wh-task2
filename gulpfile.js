@@ -3,7 +3,6 @@
 
     var gulp = require('gulp'),
         $ = require('gulp-load-plugins')(),
-        mainBowerFiles = require('main-bower-files'),
         del = require('del'),
         browserSync = require('browser-sync'),
         reload = browserSync.reload;
@@ -32,6 +31,10 @@
             return cfg.env === 'debug';
         };
 
+        cfg.uglifySettings = {
+            mangle: false
+        };
+
         return cfg;
     })();
 
@@ -49,12 +52,12 @@
     /*** Build ***/
     gulp.task('build:debug', function(done) {
         config.env = 'debug';
-        $.sequence('clean:debug', 'scss', 'index', done);
+        $.sequence('clean:debug', ['js', 'scss', 'img'], 'index', done);
     });
 
     gulp.task('build:release', function(done) {
         config.env = 'release';
-        $.sequence('clean:release', 'scss', 'index', done);
+        $.sequence('clean:release', ['js', 'scss', 'img'], 'index', done);
     });
 
     /*** Clean ***/
@@ -73,7 +76,7 @@
     });
 
     gulp.task('scss', function () {
-        return $.rubySass('src/assets/scss/style.scss', {
+        return $.rubySass('src/assets/scss/main.scss', {
                 style: (config.isDebug()) ? 'expanded' : 'compressed',
                 loadPath: ['./bower_components/susy/sass']
             })
@@ -84,10 +87,29 @@
             }));
     });
 
-    // Index.html
+    gulp.task('img', function () {
+        return gulp
+            .src('./src/assets/img/*.{jpg, png, gif, svg}')
+            .pipe(gulp.dest(config.destDir() + '/img'))
+            .pipe(reload({
+                stream: true
+            }));
+    });
+
+    gulp.task('js', function() {
+        return gulp
+            .src(['./src/assets/js/*.js'])
+            .pipe($.if(!config.isDebug(), $.concat('app.js')))
+            .pipe($.if(!config.isDebug(), $.uglify(config.uglifySettings)))
+            .pipe(gulp.dest(config.destDir() + '/js'))
+            .pipe(reload({
+                stream: true
+            }));
+    });
+    
     gulp.task('index', function() {
         var sources = gulp
-            .src(['./**/*.css'], {
+            .src(['./**/*.css', './**/*.js'], {
                 read: false,
                 cwd: config.destDir()
             });
