@@ -46,6 +46,7 @@
     gulp.task('watch', ['browser-sync'], function() {
         config.exitOnError = false;
         gulp.watch('./src/**/*.scss', ['scss']);
+        gulp.watch('./src/**/*.js', ['js']);
         gulp.watch('./src/index.html', ['index']);
     });
 
