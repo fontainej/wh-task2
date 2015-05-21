@@ -39,11 +39,10 @@
     })();
 
     // Default Task
-    gulp.task('default', ['build:debug', 'watch']);
-    gulp.task('release', ['build:release', 'watch']);
+    gulp.task('default', ['watch']);
 
     // Watch Tasks
-    gulp.task('watch', ['browser-sync'], function() {
+    gulp.task('watch', ['build:debug', 'connect'], function() {
         config.exitOnError = false;
         gulp.watch('./src/**/*.scss', ['scss']);
         gulp.watch('./src/**/*.js', ['js']);
@@ -126,10 +125,23 @@
 
     /*** Serve & Reload ***/
     gulp.task('browser-sync', function() {
-        browserSync.init({
-            server: {
-                baseDir: config.destDir()
-            }
+        browserSync({
+            logLevel: 'silent',
+            open: false
         });
+    });
+
+    gulp.task('connect', ['build:debug'], function() {
+        $.connect.server({
+            port: 3000,
+            root: config.destDir(),
+            proxy: 'localhost:3000'
+        });
+
+        return gulp
+            .src(config.destDir() + '/index.html')
+            .pipe($.open('', {
+                url: 'http://localhost:3000'
+            }));
     });
 })();
