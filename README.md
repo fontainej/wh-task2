@@ -5,8 +5,8 @@
 
 # Instructions
 
-1.) npm install
-2.) bower update
+- npm install
+- bower update
 
 # Running the app
 
