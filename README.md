@@ -30,7 +30,7 @@
 
 Please create a small responsive web site that contains the following;
 
-### Header & Footer
+**Header & Footer**
 
 Primary navigation bar with the following link titles;
 - Link 1
@@ -44,9 +44,9 @@ Primary navigation bar with the following link titles;
 3. The navigation should remain fixed on page as user scrolls
 4. One of the navigation bars should be displayed off-canvas in a vertical list when it doesn’t fit viewport width
 
-### Content area with:
+**Content area with:**
 
 - A grid of images (at least 8, no upper limit) with random ‘feature’ images that are larger than the standard images
 - 3 columns of text (lorem ipsum is fine for this) when screen width allows, and a suitable display when the screen width is too narrow
 
-*Do not use a full framework (Bootstrap, foundation etc) for this task, we expect the candidate to show they can create the task using sass and compile it to css. Sass plugins such as Bourbon, Compass, Susy etc are allowed.*
+**Do not use a full framework (Bootstrap, foundation etc) for this task, we expect the candidate to show they can create the task using sass and compile it to css. Sass plugins such as Bourbon, Compass, Susy etc are allowed.**
