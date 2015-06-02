@@ -75,12 +75,12 @@ header {
             z-index: 1;
         }
     }
-}
-
-header.sticky {
-    opacity: 0.98;
-    padding: 50px 0 10px 0;
-    position: fixed;
+    
+    .sticky {
+        opacity: 0.98;
+        padding: 50px 0 10px 0;
+        position: fixed;
+    }
 }
 
 main {
